@@ -36,11 +36,18 @@ namespace Discord_Single_Character_Spoiler
         public string spoiler(string input)
         {
             string joystring = "";
-            foreach (char c in input)
+            if (input.Length <= 499)
             {
-                joystring += "||" + c + "||";
+                foreach (char c in input)
+                {
+                    joystring += "||" + c + "||";
+                }
+                Clipboard.SetText(joystring);
             }
-            Clipboard.SetText(joystring);
+            else
+            {
+                MessageBox.Show("Message too long for discord🤡!");
+            }
             return joystring;
         }
 
@@ -49,12 +56,18 @@ namespace Discord_Single_Character_Spoiler
             string lowerinput = input.ToLower();
             string dum = "";
             bool uppercase = true;
-            foreach (char c in lowerinput)
-            {
-                dum += uppercase ? char.ToUpper(c) : c;
-                uppercase = !uppercase;
+            if(input.Length <= 1999) {
+                foreach (char c in lowerinput)
+                {
+                    dum += uppercase ? char.ToUpper(c) : c;
+                    uppercase = !uppercase;
+                }
+                Clipboard.SetText(dum);
             }
-            Clipboard.SetText(dum);
+            else
+            {
+                MessageBox.Show("Message too long for discord🤡!");
+            }
             return dum;
         }
 
@@ -68,7 +81,9 @@ namespace Discord_Single_Character_Spoiler
         {
             string dumspoiler = dumbcase(textBox1.Text);
             dumspoiler = spoiler(dumspoiler);
-            Clipboard.SetText(dumspoiler);
+            if (dumspoiler == null) {
+                Clipboard.SetText(dumspoiler);
+            }
             richTextBox1.Text = dumspoiler;
         }
     }
