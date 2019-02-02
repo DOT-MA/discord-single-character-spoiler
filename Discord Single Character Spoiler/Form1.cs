@@ -35,6 +35,11 @@ namespace Discord_Single_Character_Spoiler
 
         public string spoiler(string input)
         {
+            if (input.Length == 0)
+            {
+                MessageBox.Show("Please enter something");
+                return "Enter something";
+            }
             string joystring = "";
             if (input.Length <= 499)
             {
@@ -53,6 +58,12 @@ namespace Discord_Single_Character_Spoiler
 
         public string dumbcase(string input)
         {
+            if(input.Length == 0)
+            {
+                MessageBox.Show("Please enter something");
+                return "Enter something";
+            }
+
             string lowerinput = input.ToLower();
             string dum = "";
             bool uppercase = true;
@@ -60,7 +71,8 @@ namespace Discord_Single_Character_Spoiler
                 foreach (char c in lowerinput)
                 {
                     dum += uppercase ? char.ToUpper(c) : c;
-                    uppercase = !uppercase;
+
+                    uppercase = Char.IsWhiteSpace(c) ? uppercase : !uppercase;
                 }
                 Clipboard.SetText(dum);
             }
