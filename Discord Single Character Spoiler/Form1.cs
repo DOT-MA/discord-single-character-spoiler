@@ -30,8 +30,9 @@ namespace Discord_Single_Character_Spoiler
         private void button1_Click(object sender, EventArgs e)
         {
             string joy = spoiler(textBox1.Text);
-            label1.Text = joy;
+            richTextBox1.Text = joy;
         }
+
         public string spoiler(string input)
         {
             string joystring = "";
@@ -41,6 +42,34 @@ namespace Discord_Single_Character_Spoiler
             }
             Clipboard.SetText(joystring);
             return joystring;
+        }
+
+        public string dumbcase(string input)
+        {
+            string lowerinput = input.ToLower();
+            string dum = "";
+            bool uppercase = true;
+            foreach (char c in lowerinput)
+            {
+                dum += uppercase ? char.ToUpper(c) : c;
+                uppercase = !uppercase;
+            }
+            Clipboard.SetText(dum);
+            return dum;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string dumbstring = dumbcase(textBox1.Text);
+            richTextBox1.Text = dumbstring;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string dumspoiler = dumbcase(textBox1.Text);
+            dumspoiler = spoiler(dumspoiler);
+            Clipboard.SetText(dumspoiler);
+            richTextBox1.Text = dumspoiler;
         }
     }
 }
