@@ -31,6 +31,38 @@ namespace Discord_Single_Character_Spoiler
         {
             string joy = spoiler(textBox1.Text);
             richTextBox1.Text = joy;
+            textBox1.Text = joy;
+            Clipboard.SetText(joy);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string dumbstring = dumbcase(textBox1.Text);
+            richTextBox1.Text = dumbstring;
+            textBox1.Text = dumbstring;
+            Clipboard.SetText(dumbstring);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string dumspoiler = dumbcase(textBox1.Text);
+            dumspoiler = spoiler(dumspoiler);
+            if (dumspoiler.Length != 0) {
+                Clipboard.SetText(dumspoiler);
+            }
+            richTextBox1.Text = dumspoiler;
+            textBox1.Text = dumspoiler;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string upndownstring = upndown(textBox1.Text);
+            if (upndownstring.Length != 0)
+            {
+                Clipboard.SetText(upndownstring);
+            }
+            richTextBox1.Text = upndownstring;
+            textBox1.Text = upndownstring;
         }
 
         public string spoiler(string input)
@@ -47,7 +79,6 @@ namespace Discord_Single_Character_Spoiler
                 {
                     joystring += "||" + c + "||";
                 }
-                Clipboard.SetText(joystring);
             }
             else
             {
@@ -58,7 +89,7 @@ namespace Discord_Single_Character_Spoiler
 
         public string dumbcase(string input)
         {
-            if(input.Length == 0)
+            if (input.Length == 0)
             {
                 MessageBox.Show("Please enter something");
                 return "Enter something";
@@ -67,14 +98,14 @@ namespace Discord_Single_Character_Spoiler
             string lowerinput = input.ToLower();
             string dum = "";
             bool uppercase = true;
-            if(input.Length <= 1999) {
+            if (input.Length <= 1999)
+            {
                 foreach (char c in lowerinput)
                 {
                     dum += uppercase ? char.ToUpper(c) : c;
 
                     uppercase = Char.IsWhiteSpace(c) ? uppercase : !uppercase;
                 }
-                Clipboard.SetText(dum);
             }
             else
             {
@@ -83,20 +114,38 @@ namespace Discord_Single_Character_Spoiler
             return dum;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public string upndown(string input)
         {
-            string dumbstring = dumbcase(textBox1.Text);
-            richTextBox1.Text = dumbstring;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string dumspoiler = dumbcase(textBox1.Text);
-            dumspoiler = spoiler(dumspoiler);
-            if (dumspoiler == null) {
-                Clipboard.SetText(dumspoiler);
+            if (input.Length == 0)
+            {
+                MessageBox.Show("Please enter something");
+                return "Enter something";
             }
-            richTextBox1.Text = dumspoiler;
+            string output = "";
+            string upperoutput = input.ToUpper();
+            upperoutput = upperoutput.Replace(" ", string.Empty);
+            if (input.Length <= 999)
+            {
+                foreach (char c in upperoutput)
+                {
+                    output += c + " ";
+                }
+                //too lazy to do it any other way 
+                int lazyway = 0;
+                foreach (char c in upperoutput)
+                {
+                    if (lazyway != 0)
+                    {
+                        output += "\n" + c;
+                    }
+                    lazyway++;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Message too long for discord🤡!");
+            }
+            return output;
         }
     }
 }
