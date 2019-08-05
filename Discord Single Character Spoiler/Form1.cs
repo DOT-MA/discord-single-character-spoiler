@@ -56,7 +56,7 @@ namespace Discord_Single_Character_Spoiler
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string upndownstring = upndown(textBox1.Text);
+            string upndownstring = dumbcase(textBox1.Text);
             if (upndownstring.Length != 0)
             {
                 Clipboard.SetText(upndownstring);
