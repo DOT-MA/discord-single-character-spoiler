@@ -114,38 +114,33 @@ namespace Discord_Single_Character_Spoiler
             return dum;
         }
 
-        public string upndown(string input)
+        public static string dumbcase(string input)
         {
             if (input.Length == 0)
             {
                 MessageBox.Show("Please enter something");
                 return "Enter something";
             }
-            string output = "";
-            string upperoutput = input.ToUpper();
-            upperoutput = upperoutput.Replace(" ", string.Empty);
-            if (input.Length <= 999)
+
+            string lowerinput = input.ToLower();
+            string dum = "";
+            Random random = new Random();
+            if (input.Length <= 1999)
             {
-                foreach (char c in upperoutput)
+                foreach (char c in lowerinput)
                 {
-                    output += c + " ";
-                }
-                //too lazy to do it any other way 
-                int lazyway = 0;
-                foreach (char c in upperoutput)
-                {
-                    if (lazyway != 0)
-                    {
-                        output += "\n" + c;
+                    if (Char.IsWhiteSpace(c)) {
+                        dum += c;
+                        continue;
                     }
-                    lazyway++;
+                    dum += random.Next(100) < 50 ? char.ToUpper(c) : c;
                 }
             }
             else
             {
                 MessageBox.Show("Message too long for discord🤡!");
             }
-            return output;
+            return dum;
         }
     }
 }
