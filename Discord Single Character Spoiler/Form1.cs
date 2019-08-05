@@ -114,7 +114,7 @@ namespace Discord_Single_Character_Spoiler
             return dum;
         }
 
-        public static string dumbcase(string input)
+        public string dumbcase(string input)
         {
             if (input.Length == 0)
             {
